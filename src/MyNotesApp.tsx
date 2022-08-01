@@ -12,9 +12,20 @@ function MyNotesApp() {
 
   useEffect(() => {
     const savedNotes: Note[] = GetNotesFromStorage();
-    if (savedNotes.length > 0)
-      setNotes(savedNotes);  
+    if (savedNotes.length > 0)   
+      setNotes(orderNotes(savedNotes));  
+    
   }, [])
+
+  // useEffect(()=>{
+  //   const orderedNotes = orderNotes(notes);    
+  //     setNotes(orderedNotes);
+  //     console.log('...sorted');      
+  // }, [notes]);
+
+  function orderNotes(savedNotes: Note[]) {
+    return savedNotes.sort((a, b) => { return new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime(); });
+  }
 
   function AddNote() {
     const newNote = new Note();
@@ -43,8 +54,9 @@ function MyNotesApp() {
     return savedNotes;
   }
 
-  const filteredNotes = notes.filter(note=>(note.text+note.title).toLowerCase().includes(searchText.toLocaleLowerCase()));
-
+  let filteredNotes = notes.filter(note=>(note.text+note.title).toLowerCase().includes(searchText.toLocaleLowerCase()));
+  filteredNotes = orderNotes(filteredNotes);
+  
   return (
     <>
       <Header>
