@@ -9,9 +9,12 @@
   background: white;
   padding: 15px 30px;
   box-sizing: border-box;
+  flex-wrap: wrap;
+
 
   .logo {
     display: flex;
+    min-width: 200px;
 
     img {
       width: 35px;
@@ -33,6 +36,7 @@
   }
 
   .toolbar {
+    position: relative;
     display: flex;
 
     >* {

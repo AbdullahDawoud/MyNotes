@@ -73,3 +73,10 @@
         border: 2px solid colors.$gray;
     }
 }
+
+
+@media screen and (max-width: 630px) {
+    .note {
+        width: 100%;
+    }
+}
