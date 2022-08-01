@@ -1,0 +1,42 @@
+@use './colors.scss';
+
+*{
+  font-family: 'Poppins', 'Open Sans';
+}
+body{
+  background: colors.$bg-color;
+}
+.pointer{
+  cursor: pointer;
+}
+
+button,.clickable{
+  &:active{
+    transform: scale(0.95);
+  }
+}
+
+.btn{
+  color: white;
+  border: none;
+  cursor: pointer;
+  &:hover{
+    opacity: 0.9;
+  }
+}
+.btn-icon{
+  background: colors.$blue;
+  width: 48px;
+  border-radius: 10px;
+  i{
+    font-size: 18px;
+  }
+}
+
+.btn-icon-only{
+  background: none;
+  color: colors.$gray;
+  i{
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,42 @@
+@use '../assets/styles/global.scss';
+@use '../assets/styles/colors.scss';
+@import '../assets/styles/fonts.scss';
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100%);
+  background: white;
+  padding: 15px 30px;
+  box-sizing: border-box;
+
+  .logo {
+    display: flex;
+
+    img {
+      width: 35px;
+      height: 35px;
+      top: 4px;
+      position: relative;
+    }
+
+    .title {
+      font-family: 'Poppins';
+      font-size: 17px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.7px;
+      color: colors.$dark-grey;
+      line-height: 45px;
+      padding-left: 12px;
+    }
+  }
+
+  .toolbar {
+    display: flex;
+
+    >* {
+      margin: 0 5px;
+    }
+  }
+}

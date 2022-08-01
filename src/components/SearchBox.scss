@@ -1,0 +1,31 @@
+@use '../assets/styles/global.scss';
+@use '../assets/styles/colors.scss';
+@import '../assets/styles/fonts.scss';
+
+.search {
+    line-height: 45px;
+
+    input {
+        padding: 15px 10px;
+        border-radius: 10px;
+        border: 1px solid colors.$light-gray;
+        font-size: 14px;
+        font-weight: 500;
+        color: colors.$gray;
+        width: 200px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    i {
+        position: absolute;
+        right: 40px;
+        top: 28px;
+        font-size: 22px;
+        color: colors.$gray;
+
+
+    }
+}

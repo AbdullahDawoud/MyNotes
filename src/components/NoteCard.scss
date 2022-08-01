@@ -1,0 +1,75 @@
+@use '../assets/styles/colors.scss';
+.note {
+    min-width: 300px;
+    width: 300px;
+    height: 250px;
+    border-radius: 15px;
+    background: white;
+    margin: 10px;
+    box-sizing: border-box;
+    padding: 15px;
+    box-shadow: 1px 1px 2px 2px #dddddd3b;
+    display: flex;
+    flex-direction: column;
+
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 15px;
+    }
+
+    .note-title {
+        font-weight: 600;
+        line-height: 30px;
+
+        input{
+            border: none;
+            background: none;
+            &:focus{
+                border-bottom: 1px solid colors.$gray;
+                outline: none;
+            }
+        }
+    }
+
+    .note-text {
+        font-size: 13px;        
+        flex-grow: 1;        
+        overflow: auto;
+        background: none;
+        border: none;
+        resize: none;
+        &:focus{
+            outline: 1px solid colors.$light-gray;
+        }
+    }
+    
+    .note-footer{
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        margin-top: 10px;
+        color: colors.$gray;
+    }
+}
+
+.note.blue, .colors-bar .blue{ background: colors.$light-blue; }
+.note.green, .colors-bar .green{ background: colors.$green; }
+.note.red, .colors-bar .red { background: colors.$red; }
+.colors-bar .white { background: white; }
+
+
+.colors-bar{
+    >div{
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 2px solid white;
+        border-radius: 50%;
+        margin:  0 1px;
+    }
+    .active{
+        border: 2px solid colors.$gray;
+    }
+}
