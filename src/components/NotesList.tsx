@@ -14,7 +14,7 @@ const NotesList = ({ searchText }: Props) => {
     useEffect(() => {
         const searchResults = notes.filter(n => (n.title + n.text).toLocaleLowerCase().includes(searchText.toLocaleLowerCase()));
         setFilteredNotes(searchResults);
-    }, [searchText])
+    }, [searchText, notes])
 
 
     return (<div className='notes-wrapper'>
