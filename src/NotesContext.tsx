@@ -1,17 +1,7 @@
 import React from "react";
-import { INote as INote, NoteColorEnum } from "./models/INote";
+import { INote as INote } from "./models/INote";
+import { NoteColorEnum } from "./types/NoteColorEnum";
 
-
-export type NoteContextType = {
-    notes: INote[];
-    addNote: (note: INote) => void;
-    updateNote: (note: INote) => void;
-    removeNote: (id: number) => void;
-};
-
-interface Props {
-    children: React.ReactNode;
-}
 
 export const NotesContext = React.createContext<NoteContextType | null>(null);
 
@@ -57,3 +47,14 @@ const defaultNotes: INote[] = [
     { id: 1, title: 'First Note', text: 'this is my first note!', dateCreated: new Date(), color: NoteColorEnum.white },
     { id: 2, title: 'Second Note', text: 'this is my second note!', dateCreated: new Date(), color: NoteColorEnum.white },
 ]
+export type NoteContextType = { 
+    notes: INote[];
+    addNote: (note: INote) => void;
+    updateNote: (note: INote) => void;
+    removeNote: (id: number) => void;
+};
+
+interface Props {
+    children: React.ReactNode;
+}
+
