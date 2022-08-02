@@ -1,88 +1,49 @@
-import { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './MyNotesApp.scss';
 import Header from './components/Header';
 import { SearchBox } from './components/SearchBox';
-import { NoteCard } from './components/NoteCard';
-import { Note } from './models/Note';
+import { Note } from './components/Note';
+import { INote } from './models/INote';
+import NotesList from './components/NotesList';
+import { NoteContextType, NotesContext } from './NotesContext';
+import { NoteColorEnum } from './types/NoteColorEnum';
+
+
 
 
 function MyNotesApp() {
   const [searchText, setSearchText] = useState<string>('');
-  const [notes, setNotes] = useState<Note[]>([])
+  const { notes, addNote,updateNote } = useContext(NotesContext) as NoteContextType;
 
-  useEffect(() => {
-    const savedNotes: Note[] = GetNotesFromStorage();
-    if (savedNotes.length > 0)   
-      setNotes(orderNotes(savedNotes));  
+
+  const addNewNote = () => {
     
-  }, [])
-
-  // useEffect(()=>{
-  //   const orderedNotes = orderNotes(notes);    
-  //     setNotes(orderedNotes);
-  //     console.log('...sorted');      
-  // }, [notes]);
-
-  function orderNotes(savedNotes: Note[]) {
-    return savedNotes.sort((a, b) => { return new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime(); });
+    const newNote: INote = {
+      id: Math.round(Math.random() * 100),
+      dateCreated: new Date,
+      title: '',
+      text: '',
+      color: NoteColorEnum.green
+    };
+    
+    addNote(newNote);
   }
 
-  function AddNote() {
-    const newNote = new Note();
-    const updatedNotes = notes.concat(newNote);
-    setNotes(updatedNotes); 
-
-    SaveNotesToStorage(updatedNotes);
-  }
-
-  function RemoveNote(note: Note){
-    const index = notes.findIndex(n => n === note);    
-    notes.splice(index, 1);
-    setNotes([...notes]);
-
-    SaveNotesToStorage(notes);
-  }
-  
-  function SaveNotesToStorage(notes:Note[]) {
-    localStorage.setItem('notes', JSON.stringify(notes));
-  }
-  function GetNotesFromStorage() : Note[] {
-    const savedNotesAsString = localStorage.getItem('notes');
-    if (!savedNotesAsString)
-      return [];
-    const savedNotes: Note[] = JSON.parse(savedNotesAsString) || [];
-    return savedNotes;
-  }
-
-  let filteredNotes = notes.filter(note=>(note.text+note.title).toLowerCase().includes(searchText.toLocaleLowerCase()));
-  filteredNotes = orderNotes(filteredNotes);
-  
   return (
     <>
       <Header>
-        <button className='btn btn-icon' onClick={AddNote}><i className="las la-plus"></i></button>
+        <button className='btn btn-icon' onClick={addNewNote}><i className="las la-plus"></i></button>
         <SearchBox onSearchTextChanged={(t => setSearchText(t))} />
       </Header>
 
 
-      {searchText && <div className='reasult-div'> {filteredNotes.length} results found for <i>'{searchText}'</i>:</div>}
-      
-
-      <div className='notes-wrapper'>
-        {filteredNotes.map(note => (
-          <NoteCard 
-          key={note.id} 
-          note={note} 
-          onRemove={()=> RemoveNote(note)}
-          onChange={()=> SaveNotesToStorage(notes)}></NoteCard>
-        ))}
-      </div>
+      {searchText && <div className='reasult-div'> Results found for <i>'{searchText}'</i>:</div>}
 
 
-    </>
+      <NotesList searchText={searchText} />
+</>
   );
 }
 
 export default MyNotesApp;
-
 

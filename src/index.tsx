@@ -5,13 +5,17 @@ import reportWebVitals from './reportWebVitals';
 
 import 'normalize.css/normalize.css';
 import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
+import NotesContextProvider, { NoteContextType, NotesContext } from './NotesContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+  
   <React.StrictMode>
-    <MyNotesApp />
+    <NotesContextProvider>
+      <MyNotesApp />
+    </NotesContextProvider>
   </React.StrictMode>
 );
 

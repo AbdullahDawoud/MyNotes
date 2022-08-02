@@ -1,18 +1,27 @@
 import { ChangeEvent, useState } from "react";
-import { SearchBoxProps } from "../types/SearchBoxProps";
 import './SearchBox.scss'
 
-export function SearchBox(props: SearchBoxProps) {
+interface SearchBoxProps {
+    onSearchTextChanged: (searchText: string) => void;
+};
+
+export function SearchBox(
+    { onSearchTextChanged }: SearchBoxProps) {
+
     const [searchValue, setSearchValue] = useState<string>('');
-    function clearSearch() {
+
+    const clearSearch = () => {
         setSearchValue('');
-        props.onSearchTextChanged(''); 
-    } 
-    function onChange(e: ChangeEvent<HTMLInputElement>) {
-        const value = e.target.value;
-        setSearchValue(value);
-        props.onSearchTextChanged(value);
+
+        onSearchTextChanged('');
     }
+    
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.target.value);
+
+        onSearchTextChanged(e.target.value);
+    }
+
     return (
         <div className="search">
             <input type="text" value={searchValue} onChange={onChange} placeholder="Search..." />
