@@ -1,4 +1,4 @@
-import { NoteColorEnum } from "../types/NoteColorEnum";
+import { NoteColorEnum } from "./NoteColorEnum";
 
 export type INote = {
     id: number;

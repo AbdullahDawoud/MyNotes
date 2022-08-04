@@ -5,8 +5,8 @@ interface SearchBoxProps {
     onSearchTextChanged: (searchText: string) => void;
 };
 
-export function SearchBox(
-    { onSearchTextChanged }: SearchBoxProps) {
+export const SearchBox = (
+    { onSearchTextChanged }: SearchBoxProps) => {
 
     const [searchValue, setSearchValue] = useState<string>('');
 

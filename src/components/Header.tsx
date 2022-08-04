@@ -1,23 +1,22 @@
-import { PropsWithChildren } from "react";
-import './Header.scss'
+import React from "react";
+import "./Header.scss";
 
-const logoUrl = 'https://cdn-icons-png.flaticon.com/512/1057/1057556.png';
+import logo from '../assets/images/logo.svg';
 
-function Header(props: PropsWithChildren) {
-
-    return (
-        <header className="app-header">
-            <div className="logo">
-                <img src={logoUrl} alt="" />
-                <div className="title">My Notes</div>
-            </div>
-            <div className="toolbar">
-                {props.children}
-            </div>
-        </header>
-    );
+interface Props {
+  children: React.ReactNode;
 }
 
+const Header: React.FC<Props> = ({ children }) => {
+  return (
+    <header className="app-header">
+      <div className="logo">
+        <img src={logo} alt="" />
+        <div className="title">My Notes</div>
+      </div>
+      <div className="toolbar">{children}</div>
+    </header>
+  );
+};
+
 export default Header;
-
-
