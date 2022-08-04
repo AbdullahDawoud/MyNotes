@@ -17,7 +17,6 @@ const App: React.FC = () => {
         <SearchBox onSearchTextChanged={(t) => setSearchText(t)} />
       </Header>
 
-
       {searchText && (
         <div className="reasult-div">
           Results found for <i>'{searchText}'</i>:
@@ -25,7 +24,7 @@ const App: React.FC = () => {
       )}
 
       {!searchText && <h3>Add new note:</h3>}
-      {!searchText && <Note displayNote={null} isNewEntity={true} />}
+      <div className="flex">{!searchText && <Note displayNote={null} isNewEntity={true} />}</div>
 
       {!searchText && <h3>Notes:</h3>}
       <NotesList searchText={searchText} />

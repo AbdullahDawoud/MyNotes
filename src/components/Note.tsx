@@ -8,6 +8,7 @@ import { NoteColorEnum } from "../types/NoteColorEnum";
 const notesPlaceholder = "Type your notes here...";
 const titlePlaceholder = "Title...";
 const newEntityTitlePlaceholder = "New Note...";
+const textAreaRows = 3;
 
 export interface NoteProps {
   displayNote: INote | null;
@@ -83,7 +84,7 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
           className="note-text"
           onChange={handleInputChange}
           placeholder={notesPlaceholder}
-          rows={5}
+          rows={textAreaRows}
         >
           {note.text}
         </textarea>
