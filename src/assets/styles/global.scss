@@ -1,42 +1,64 @@
 @use './colors.scss';
 
-*{
+* {
   font-family: 'Poppins', 'Open Sans';
 }
-body{
+
+body {
   background: colors.$bg-color;
 }
-.pointer{
+
+.pointer {
   cursor: pointer;
 }
 
-button,.clickable{
-  &:active{
+button,
+.clickable {
+  &:active {
     transform: scale(0.95);
   }
 }
 
-.btn{
+.btn {
   color: white;
   border: none;
   cursor: pointer;
-  &:hover{
+
+  &:hover {
     opacity: 0.9;
   }
+
+  border-radius: 10px;
 }
-.btn-icon{
+
+.btn-icon {
   background: colors.$blue;
   width: 48px;
-  border-radius: 10px;
-  i{
+
+  i {
     font-size: 18px;
   }
 }
 
-.btn-icon-only{
+.btn-yellow {
+  background: colors.$yellow;
+
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.btn-icon-only {
   background: none;
   color: colors.$gray;
-  i{
+
+  i {
     font-size: 18px;
   }
+}
+
+.flex{
+  display: flex;
 }

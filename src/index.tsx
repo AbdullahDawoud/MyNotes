@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import MyNotesApp from './MyNotesApp';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 import 'normalize.css/normalize.css';
 import 'line-awesome/dist/line-awesome/css/line-awesome.min.css';
+import NotesContextProvider from './NotesContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+  
   <React.StrictMode>
-    <MyNotesApp />
+    <NotesContextProvider>
+      <App />
+    </NotesContextProvider>
   </React.StrictMode>
 );
 
