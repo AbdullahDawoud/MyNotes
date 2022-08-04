@@ -4,6 +4,7 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { INote } from "../types/INote";
 import { NoteContextType, NotesContext } from "../NotesContext";
 import { NoteColorEnum } from "../types/NoteColorEnum";
+import { NotesReducerActionTypeEnum } from "../types/NotesReducerActionEnum";
 
 const notesPlaceholder = "Type your notes here...";
 const titlePlaceholder = "Title...";
@@ -19,9 +20,7 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
   const [note, setNote] = useState<INote>(displayNote ?? { ...defaultNote });
   const [isDirty, setIsDirty] = useState(false);
 
-  const { addNote, updateNote, removeNote } = useContext(
-    NotesContext
-  ) as NoteContextType;
+  const { dispatch } = useContext(NotesContext) as NoteContextType;
 
   const setNoteColor = (newColor: NoteColorEnum) => {
     setNote({ ...note, color: newColor });
@@ -34,16 +33,24 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
     setNote({ ...note, [name]: value });
   };
 
-  const OnSubmit = (e: any) => {
-    isNewEntity ? addNote(note) : updateNote(note);
+  const onSubmit = (e: any) => {
+    dispatch({
+      type: isNewEntity
+        ? NotesReducerActionTypeEnum.AddNote
+        : NotesReducerActionTypeEnum.UpdateNote,
+      payload: note,
+    });
 
     setIsDirty(false);
 
-    if (isNewEntity) {
-      setNote({ ...defaultNote });
-    }
+    if (isNewEntity)
+      setNote({ ...defaultNote, id: Math.round(Math.random() * 9999) }); //  set new id
 
     e.preventDefault();
+  };
+
+  const removeNote = (note: INote) => {
+    dispatch({ type: NotesReducerActionTypeEnum.RemoveNote, payload: note });
   };
 
   useEffect(() => {
@@ -54,7 +61,7 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
 
   return (
     <div className={`note new ${note.color}`}>
-      <form onSubmit={OnSubmit}>
+      <form onSubmit={onSubmit}>
         <header>
           <div className="note-title">
             <input
@@ -126,5 +133,5 @@ const defaultNote: INote = {
   dateCreated: new Date(),
   title: "",
   text: "",
-  id: 0,
+  id: Math.round(Math.random() * 9999)
 };
