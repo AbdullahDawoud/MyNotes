@@ -1,13 +1,13 @@
-import { INote } from "./types/INote";
-import { NotesReducerAction } from "./types/NotesReducerAction";
-import { NotesReducerActionTypeEnum } from "./types/NotesReducerActionEnum";
+import { INote } from './types/INote';
+import { NotesReducerAction } from './types/NotesReducerAction';
+import { NotesReducerActionTypeEnum } from './types/NotesReducerActionEnum';
 
 const notesReducer = (notes: INote[], action: NotesReducerAction) => {
   const { type, payload } = action;
   switch (type) {
-    case NotesReducerActionTypeEnum.AddNote: 
+    case NotesReducerActionTypeEnum.AddNote:
       return [...notes, payload];
-    
+
     case NotesReducerActionTypeEnum.UpdateNote: {
       const newNotesList = [...notes];
 

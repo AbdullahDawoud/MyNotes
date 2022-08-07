@@ -1,14 +1,14 @@
-import "./Note.scss";
-import moment from "moment";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { INote } from "../types/INote";
-import { NoteContextType, NotesContext } from "../NotesContext";
-import { NoteColorEnum } from "../types/NoteColorEnum";
-import { NotesReducerActionTypeEnum } from "../types/NotesReducerActionEnum";
+import './Note.scss';
+import moment from 'moment';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { INote } from '../types/INote';
+import { NoteContextType, NotesContext } from '../NotesContext';
+import { NoteColorEnum } from '../types/NoteColorEnum';
+import { NotesReducerActionTypeEnum } from '../types/NotesReducerActionEnum';
 
-const notesPlaceholder = "Type your notes here...";
-const titlePlaceholder = "Title...";
-const newEntityTitlePlaceholder = "New Note...";
+const notesPlaceholder = 'Type your notes here...';
+const titlePlaceholder = 'Title...';
+const newEntityTitlePlaceholder = 'New Note...';
 const textAreaRows = 3;
 
 export interface NoteProps {
@@ -38,13 +38,12 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
       type: isNewEntity
         ? NotesReducerActionTypeEnum.AddNote
         : NotesReducerActionTypeEnum.UpdateNote,
-      payload: note,
+      payload: note
     });
 
     setIsDirty(false);
 
-    if (isNewEntity)
-      setNote({ ...defaultNote, id: Math.round(Math.random() * 9999) }); //  set new id
+    if (isNewEntity) setNote({ ...defaultNote, id: Math.round(Math.random() * 9999) }); //  set new id
 
     e.preventDefault();
   };
@@ -69,17 +68,12 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
               name="title"
               defaultValue={note.title}
               value={note.title}
-              placeholder={
-                isNewEntity ? newEntityTitlePlaceholder : titlePlaceholder
-              }
+              placeholder={isNewEntity ? newEntityTitlePlaceholder : titlePlaceholder}
               onChange={handleInputChange}
             />
           </div>
           {!isNewEntity && (
-            <button
-              className="btn btn-icon-only"
-              onClick={() => removeNote(note)}
-            >
+            <button className="btn btn-icon-only" onClick={() => removeNote(note)}>
               <i className="las la-times"></i>
             </button>
           )}
@@ -91,26 +85,25 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
           className="note-text"
           onChange={handleInputChange}
           placeholder={notesPlaceholder}
-          rows={textAreaRows}
-        >
+          rows={textAreaRows}>
           {note.text}
         </textarea>
 
         <div className="note-footer">
           {!isNewEntity && (
             <div className="note-date-text">
-              Added {moment(note.dateCreated).format("D MMM H:m a")}
+              Added {moment(note.dateCreated).format('D MMM H:m a')}
             </div>
           )}
 
           <div className="colors-bar">
             {Object.values(NoteColorEnum).map((d) => (
               <div
-                className={d + (note.color === d ? "active" : "")}
+                key={d}
+                className={d + (note.color === d ? 'active' : '')}
                 onClick={() => {
                   setNoteColor(d);
-                }}
-              ></div>
+                }}></div>
             ))}
           </div>
 
@@ -118,8 +111,8 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
             <input
               className="btn btn-yellow"
               type="submit"
-              value={isNewEntity ? "Add" : "Save"}
-              disabled={note.title + note.text === ""}
+              value={isNewEntity ? 'Add' : 'Save'}
+              disabled={note.title + note.text === ''}
             />
           )}
         </div>
@@ -131,7 +124,7 @@ export const Note = ({ displayNote, isNewEntity }: NoteProps) => {
 const defaultNote: INote = {
   color: NoteColorEnum.white,
   dateCreated: new Date(),
-  title: "",
-  text: "",
+  title: '',
+  text: '',
   id: Math.round(Math.random() * 9999)
 };

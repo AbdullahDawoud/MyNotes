@@ -1,12 +1,12 @@
-import { useState } from "react";
-import "./App.scss";
-import Header from "./Header";
-import { SearchBox } from "./SearchBox";
-import NotesList from "./NotesList";
-import { Note } from "./Note";
+import React, { useState } from 'react';
+import './App.scss';
+import Header from './Header';
+import { SearchBox } from './SearchBox';
+import NotesList from './NotesList';
+import { Note } from './Note';
 
 const App: React.FC = () => {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   return (
     <>
@@ -19,10 +19,9 @@ const App: React.FC = () => {
 
       {searchText && (
         <div className="reasult-div">
-          Results found for <i>'{searchText}'</i>:
+          Results found for <i>{searchText}</i>:
         </div>
       )}
-
       {!searchText && <h3>Add new note:</h3>}
       <div className="flex">{!searchText && <Note displayNote={null} isNewEntity={true} />}</div>
 

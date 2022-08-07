@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { NoteContextType, NotesContext } from "../NotesContext";
-import { Note } from "./Note";
+import { useContext, useEffect, useState } from 'react';
+import { NoteContextType, NotesContext } from '../NotesContext';
+import { Note } from './Note';
 
 interface Props {
   searchText: string;
@@ -12,9 +12,7 @@ const NotesList = ({ searchText }: Props) => {
 
   useEffect(() => {
     const searchResults = notes.filter((n) =>
-      (n.title + n.text)
-        .toLocaleLowerCase()
-        .includes(searchText.toLocaleLowerCase())
+      (n.title + n.text).toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
     );
     setFilteredNotes(searchResults);
   }, [searchText, notes]);
